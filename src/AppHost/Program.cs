@@ -14,4 +14,9 @@ var db = builder.AddResource(postgresContainer)
 var apiService = builder.AddProject<Projects.Api>("api")
     .WithReference(db);
 
+builder.AddNpmApp("frontend", "../WebUI", "dev")
+    .WithReference(apiService)
+    .WithEndpoint(containerPort: 3000, scheme: "http", env: "PORT")
+    .AsDockerfileInManifest();
+
 builder.Build().Run();
