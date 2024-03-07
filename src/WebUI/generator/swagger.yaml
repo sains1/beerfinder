@@ -1,0 +1,275 @@
+openapi: 3.0.1
+info:
+  title: "Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+  version: "1.0"
+paths:
+  /api/Tags:
+    get:
+      tags:
+        - Tags
+      summary: Get a list of all the tags
+      operationId: ListTags
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  "/api/Venue/{id}":
+    get:
+      tags:
+        - Venue
+      summary: Get a venue by its id
+      operationId: GetVenue
+      parameters:
+        - name: id
+          in: path
+          description: ""
+          required: true
+          style: simple
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/VenueDetailDto"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VenueDetailDto"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/VenueDetailDto"
+        "404":
+          description: Not Found
+  /api/Venue:
+    get:
+      tags:
+        - Venue
+      summary: "Search, sort, and filter venues"
+      operationId: ListVenues
+      parameters:
+        - name: Tags
+          in: query
+          style: form
+          schema:
+            type: array
+            items:
+              type: string
+        - name: MaxDistanceKm
+          in: query
+          style: form
+          schema:
+            type: number
+            format: double
+        - name: StarsBeerGte
+          in: query
+          style: form
+          schema:
+            type: number
+            format: double
+        - name: StarsAtmosphereGte
+          in: query
+          style: form
+          schema:
+            type: number
+            format: double
+        - name: StarsAmenitiesGte
+          in: query
+          style: form
+          schema:
+            type: number
+            format: double
+        - name: StarsValueGte
+          in: query
+          style: form
+          schema:
+            type: number
+            format: double
+        - name: SortBy
+          in: query
+          style: form
+          schema:
+            $ref: "#/components/schemas/ListVenuesSortOrder"
+        - name: Skip
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: Limit
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ListVenuesResponse"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVenuesResponse"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ListVenuesResponse"
+        "400":
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+components:
+  schemas:
+    ListVenuesResponse:
+      type: object
+      properties:
+        venues:
+          type: array
+          items:
+            $ref: "#/components/schemas/VenueListItemDto"
+          nullable: true
+      additionalProperties: false
+    ListVenuesSortOrder:
+      enum:
+        - Distance
+        - Name
+        - StarsBeer
+        - StarsAtmosphere
+        - StarsAmenities
+        - StarsValue
+      type: string
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    VenueDetailDto:
+      required:
+        - address
+        - excerpt
+        - starsAmenities
+        - starsAtmosphere
+        - starsBeer
+        - starsValue
+        - tags
+        - thumbnail
+        - url
+        - venueId
+        - venueName
+      type: object
+      properties:
+        venueId:
+          type: integer
+          format: int32
+        venueName:
+          minLength: 1
+          type: string
+        url:
+          type: string
+          format: uri
+        thumbnail:
+          type: string
+          format: uri
+        excerpt:
+          minLength: 1
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        address:
+          minLength: 1
+          type: string
+        starsBeer:
+          type: number
+          format: double
+        starsAtmosphere:
+          type: number
+          format: double
+        starsAmenities:
+          type: number
+          format: double
+        starsValue:
+          type: number
+          format: double
+        phone:
+          type: string
+          nullable: true
+        twitter:
+          type: string
+          nullable: true
+      additionalProperties: false
+    VenueListItemDto:
+      required:
+        - distance
+        - starsAmenities
+        - starsAtmosphere
+        - starsBeer
+        - starsValue
+        - venueId
+        - venueName
+      type: object
+      properties:
+        venueId:
+          type: integer
+          format: int32
+        venueName:
+          minLength: 1
+          type: string
+        starsBeer:
+          type: number
+          format: double
+        starsAtmosphere:
+          type: number
+          format: double
+        starsAmenities:
+          type: number
+          format: double
+        starsValue:
+          type: number
+          format: double
+        distance:
+          type: number
+          format: double
+      additionalProperties: false

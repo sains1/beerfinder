@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:open": "cypress open",
-    "prettier:fix": "prettier --write ./"
+    "prettier:fix": "prettier --write ./",
+    "openapi": "cross-env npm run openapi:fetch-schema && npm run openapi:gen",
+    "openapi:fetch-schema": "cd ../Api/ && PUBLISH_SWAGGER_DOC=true dotnet publish && cp ./bin/Release/net8.0/publish/swagger.yaml ../WebUI/generator/swagger.yaml",
+    "openapi:gen": "rm -rf ./lib/api-codegen/ && openapi-generator-cli generate -i ./generator/swagger.yaml -o ./lib/api-codegen -c ./generator/openapigenerator.yaml"
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.0",
@@ -22,10 +25,12 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.11.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "cross-env": "^7.0.3",
     "cypress": "^13.6.6",
     "eslint": "^8",
     "eslint-config-next": "14.1.3",

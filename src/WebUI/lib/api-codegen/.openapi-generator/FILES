@@ -1,0 +1,12 @@
+.openapi-generator-ignore
+apis/TagsApi.ts
+apis/VenueApi.ts
+apis/index.ts
+index.ts
+models/ListVenuesResponse.ts
+models/ListVenuesSortOrder.ts
+models/ProblemDetails.ts
+models/VenueDetailDto.ts
+models/VenueListItemDto.ts
+models/index.ts
+runtime.ts

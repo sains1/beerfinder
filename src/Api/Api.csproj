@@ -36,4 +36,9 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PostPublish" AfterTargets="Publish" Condition="'$(PUBLISH_SWAGGER_DOC)' == 'true'">
+    <Exec Command="dotnet tool restore" />
+    <Exec Command="dotnet swagger tofile --yaml --output $(PublishDir)\swagger.yaml $(OutputPath)\$(AssemblyName).dll v1 " EnvironmentVariables="DOTNET_ROLL_FORWARD=LatestMajor" />
+  </Target>
+
 </Project>
