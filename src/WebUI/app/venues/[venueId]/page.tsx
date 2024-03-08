@@ -20,6 +20,7 @@ export default async function VenuePage({
   params: { venueId: number };
 }) {
   const data = await fetchVenueDetails(params.venueId);
+  console.log(JSON.stringify(data));
   return (
     <div className="flex flex-col w-full p-8 gap-8">
       <div>

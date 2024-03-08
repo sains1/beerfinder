@@ -1,0 +1,24 @@
+{
+  "venueId": 63,
+  "venueName": "Fox & Newt",
+  "url": "http://leedsbeer.info/?p=1595",
+  "thumbnail": "http://leedsbeer.info/wp-content/uploads/2013/06/IMG_20130604_180203.jpg",
+  "excerpt": "The only pub in the city centre to brew its own cask ale, and that's not even the best thing about it.",
+  "tags": [
+    "arcade games",
+    "beer garden",
+    "coffee",
+    "food",
+    "free wifi",
+    "jukebox",
+    "live music",
+    "sofas"
+  ],
+  "address": "9 Burley Street, Leeds LS3 1LD",
+  "starsBeer": 3.5,
+  "starsAtmosphere": 3.5,
+  "starsAmenities": 4.5,
+  "starsValue": 4,
+  "phone": "07506 741039",
+  "twitter": ""
+}
