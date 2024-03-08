@@ -24,6 +24,8 @@ Contents:
 
 ## Improvements (with more time)
 
+- `Component level tests`: I've added a few example cypress tests for e2e coverage, but didn't get chance to add any component-level tests. In the past I've covered this using [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/) to test components in isolation from other dependencies.
+
 - `Gated quality checks`: On a proper app I'd generally have gated checks as part of a CI pipeline that runs on code reviews to check things such as
 
   - formatting / linting
@@ -32,10 +34,11 @@ Contents:
   - test coverage
   - static code analysis
 
-- `Test Coverage`: There are some notable gaps in coverage as part of the task:
+- `Test Coverage`: There are some other notable gaps in coverage as part of the task:
 
   - API tests
   - Accessibility tests (e.g. using cypress axe plugin)
+  - Cypress e2e tests could be expanded to include more functionality
 
 - `Distributed Tracing & Observability`: The API is instrumented with OpenTelemetry which provides the ability to do distributed tracing. Given more time we could add the same to the NextJS application and propogate trace headers between the applications for an end-to-end view of requests
 
