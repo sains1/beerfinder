@@ -89,7 +89,7 @@ function RatingFilter({
   },
 }: RatingFilterProps) {
   return (
-    <div className="flex flex-row gap-2">
+    <div className="flex flex-row gap-2" data-cy={`rating-${type}`}>
       {new Array(5).fill(0).map((_, idx) => (
         <Button
           key={idx}
