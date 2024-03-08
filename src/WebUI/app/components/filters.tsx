@@ -9,11 +9,24 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ListVenuesSortOrder } from "@/lib/api-codegen";
-import { RatingFilter, VenueFilters, useVenueFilters } from "./useVenueFilters";
+import {
+  RatingFilter as FilterType,
+  VenueFilters,
+  useVenueFilters,
+} from "./useVenueFilters";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Suspense } from "react";
 
 export function Filters() {
+  return (
+    <Suspense>
+      <FiltersInternal />
+    </Suspense>
+  );
+}
+
+export function FiltersInternal() {
   const filters = useVenueFilters();
 
   return (
@@ -63,7 +76,7 @@ export function Filters() {
 }
 
 type RatingFilterProps = {
-  type: RatingFilter;
+  type: FilterType;
   filters: VenueFilters;
   value: number | null;
 };
@@ -79,6 +92,7 @@ function RatingFilter({
     <div className="flex flex-row gap-2">
       {new Array(5).fill(0).map((_, idx) => (
         <Button
+          key={idx}
           size="sm"
           variant="outline"
           onClick={() => toggleRating(type, idx + 1)}

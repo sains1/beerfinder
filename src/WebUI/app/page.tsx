@@ -1,12 +1,9 @@
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { Filters } from "./components/filters";
 import { VenueListPage } from "./components/venues-list";
-import { env } from "node:process";
 import { Button } from "@/components/ui/button";
 
-export default function Home() {
-  const serverUrl = env["services__api__1"] ?? "";
-
+export default async function Home() {
   return (
     <main className="flex flex-row">
       <div className="h-[500px] w-[300px] sticky top-[69px] hidden lg:block p-4">
@@ -28,7 +25,7 @@ export default function Home() {
             <Filters />
           </DrawerContent>
         </Drawer>
-        <VenueListPage serverUrl={serverUrl} />
+        <VenueListPage />
       </div>
     </main>
   );

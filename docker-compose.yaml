@@ -1,0 +1,44 @@
+services:
+  api:
+    image: api
+    build:
+      context: .
+      dockerfile: ./src/Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__BeerFinderDb: Host=postgresql;Port=5432;Database=beerfinder;Username=postgres;Password=postgres;
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgresql:
+        condition: service_started
+
+  postgresql:
+    image: postgis/postgis
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - dbvolume:/var/lib/postgresql/data
+      - ./.postgres/postgres-init.sql:/docker-entrypoint-initdb.d/postgres-init.sql
+
+  web:
+    image: web
+    build:
+      context: ./src/WebUI
+      args:
+        # note: this will be static at build time so we'd need an alternative config approach to
+        #     promote the container to different envs
+        API_URL: http://localhost:8080
+    environment:
+      services__api__1: http://api:8080
+    ports:
+      - 3000:3000
+    depends_on:
+      api:
+        condition: service_started
+
+volumes:
+  dbvolume:

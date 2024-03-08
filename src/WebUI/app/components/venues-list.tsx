@@ -8,15 +8,11 @@ import { VenueCard } from "./venue-card";
 import { Button } from "@/components/ui/button";
 import { useVenueFilters } from "./useVenueFilters";
 
-type VenueListProps = {
-  serverUrl: string;
-};
-
-export function VenueListPage(props: VenueListProps) {
+export function VenueListPage() {
   return (
     <div className="flex-grow flex-row flex-wrap w-full">
       <Suspense fallback={<>loading...</>}>
-        <VenueList {...props} />
+        <VenueList />
       </Suspense>
     </div>
   );
@@ -24,10 +20,15 @@ export function VenueListPage(props: VenueListProps) {
 
 const PAGE_LIMIT = 10;
 
-function VenueList(props: VenueListProps) {
+function VenueList() {
   const client = useMemo(
-    () => new VenueApi(new Configuration({ basePath: props.serverUrl })),
-    [props.serverUrl],
+    () =>
+      new VenueApi(
+        new Configuration({
+          basePath: process.env.NEXT_PUBLIC_services__api__clientUrl,
+        }),
+      ),
+    [],
   );
 
   const search = useSearchParams();
@@ -69,7 +70,7 @@ function VenueList(props: VenueListProps) {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
         {venues.map((x) => (
-          <VenueCard venue={x} />
+          <VenueCard venue={x} key={x.venueId} />
         ))}
       </div>
       <div className="w-full flex justify-center my-4">

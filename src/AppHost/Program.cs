@@ -17,7 +17,7 @@ var apiService = builder.AddProject<Projects.Api>("api")
 builder.AddNpmApp("frontend", "../WebUI", "dev")
     .WithReference(apiService)
     .WithEndpoint(hostPort: 3000, containerPort: 3000, scheme: "http", env: "PORT")
-    .WithEnvironment("services__api__clientUrl", "http://localhost:5336")
+    .WithEnvironment("NEXT_PUBLIC_services__api__clientUrl", "http://localhost:5336")
     .AsDockerfileInManifest();
 
 builder.Build().Run();
