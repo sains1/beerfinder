@@ -12,10 +12,15 @@ export type VenueFilters = {
   actions: {
     toggleSort: (sort: ListVenuesSortOrder) => void;
     clearFilters: () => void;
+    toggleRating: (rating: RatingFilter, value: number) => void;
   };
 };
 
-type Rating = "starsBeer" | "starsAmenities" | "starsAtmosphere" | "starsValue";
+export type RatingFilter =
+  | "starsBeer"
+  | "starsAmenities"
+  | "starsAtmosphere"
+  | "starsValue";
 
 const tagParam = "includes";
 const sortParam = "sort";
@@ -41,6 +46,20 @@ export function useVenueFilters(): VenueFilters {
     [searchParams],
   );
 
+  const toggleRating = useCallback(
+    (rating: RatingFilter, value: number) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (params.get(rating) === value.toString()) {
+        params.delete(rating);
+      } else {
+        params.set(rating, value.toString());
+      }
+
+      window.history.pushState(null, "", "?" + params.toString());
+    },
+    [searchParams],
+  );
+
   const clearFilters = useCallback(() => {
     window.history.pushState(null, "", "?");
   }, []);
@@ -55,6 +74,7 @@ export function useVenueFilters(): VenueFilters {
     actions: {
       toggleSort,
       clearFilters,
+      toggleRating,
     },
   };
 }

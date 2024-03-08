@@ -41,6 +41,10 @@ function VenueList(props: VenueListProps) {
           skip: pageParam * PAGE_LIMIT,
           limit: PAGE_LIMIT,
           sortBy: filters.sort ?? undefined,
+          starsAmenitiesGte: filters.starsAmenities ?? undefined,
+          starsBeerGte: filters.starsBeer ?? undefined,
+          starsValueGte: filters.starsValue ?? undefined,
+          starsAtmosphereGte: filters.starsAtmosphere ?? undefined,
         },
         { cache: "no-cache" },
       );
@@ -69,6 +73,9 @@ function VenueList(props: VenueListProps) {
         ))}
       </div>
       <div className="w-full flex justify-center my-4">
+        {venues.length == 0 && !isLoading && (
+          <div>No results matches the search criteria</div>
+        )}
         {isLoading && <div>Loading...</div>}
         {hasMore && (
           <Button onClick={() => fetchNextPage()} variant={"outline"}>
