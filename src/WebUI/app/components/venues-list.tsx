@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useMemo } from "react";
 import { VenueCard } from "./venue-card";
 import { Button } from "@/components/ui/button";
+import { useVenueFilters } from "./useVenueFilters";
 
 type VenueListProps = {
   serverUrl: string;
@@ -30,6 +31,7 @@ function VenueList(props: VenueListProps) {
   );
 
   const search = useSearchParams();
+  const filters = useVenueFilters();
 
   const { data, fetchNextPage, error, isLoading } = useInfiniteQuery({
     queryKey: [search.toString()],
@@ -38,6 +40,7 @@ function VenueList(props: VenueListProps) {
         {
           skip: pageParam * PAGE_LIMIT,
           limit: PAGE_LIMIT,
+          sortBy: filters.sort ?? undefined,
         },
         { cache: "no-cache" },
       );
