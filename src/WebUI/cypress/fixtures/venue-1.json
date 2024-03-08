@@ -1,0 +1,15 @@
+{
+  "venueId": 1,
+  "venueName": "...escobar",
+  "url": "http://leedsbeer.info/?p=765",
+  "thumbnail": "http://leedsbeer.info/wp-content/uploads/2012/11/20121129_185815.jpg",
+  "excerpt": "...It's really dark in here!",
+  "tags": ["food", "live music", "sofas"],
+  "address": "23-25 Great George Street, Leeds LS1 3BB",
+  "starsBeer": 2,
+  "starsAtmosphere": 3,
+  "starsAmenities": 3,
+  "starsValue": 3,
+  "phone": "0113 220 4389",
+  "twitter": "EscobarLeeds"
+}
