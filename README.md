@@ -87,7 +87,7 @@ Run the AspireAppHost project from VisualStudio, this should open the Aspire das
 
 ![](./doc/screenshots/aspire-app-host.png)
 
-## Runnin the E2E Tests
+## Running the E2E Tests
 
 From `./src/WebUI` run `npm run cypress:open`
 
@@ -101,19 +101,24 @@ The generation of a new client package when the contract changes is done manuall
 
 ### Landing Page
 
-Desktop:
+##### Desktop:
+
 ![](./doc/screenshots/desktop-homepage.png)
 
-Mobile:
+##### Mobile:
+
 ![](./doc/screenshots/mobile-landing-page.png)
 
-Mobile (filters view):
+##### Mobile (filters view):
+
 ![](./doc/screenshots/mobile-landing-page-filters.png)
 
 ### Details Page
 
-Desktop:
+##### Desktop:
+
 ![](./doc/screenshots/desktop-details-page.png)
 
-Mobile:
+##### Mobile:
+
 ![](./doc/screenshots/mobile-details-page.png)
